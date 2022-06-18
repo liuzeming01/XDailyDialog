@@ -2,7 +2,7 @@
 
 This repository includes the dataset and baseilnes of the paper: XDailyDialog: A Multilingual Parallel Corpus for Chit-chat. 
 
-Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan5, Kaiping Peng
+Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan, Kaiping Peng
 
 
 We created this dataset based on the popular dialogue dataset (English Only): [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf)
