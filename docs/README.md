@@ -1,4 +1,4 @@
-# XDailyDialog: A Multilingual Parallel Corpus for Chit-chat
+# XDailyDialog
 
 This repository includes the dataset and baseilnes of the paper: XDailyDialog: A Multilingual Parallel Corpus for Chit-chat. 
 
