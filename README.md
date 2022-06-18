@@ -1,6 +1,6 @@
 # XDailyDialog: A Multilingual Parallel Corpus for Chit-chat
 
-This repository includes the dataset and baseilnes of the paper: XDailyDialog: A Multilingual Parallel Corpus for Chit-chat. 
+This repository includes the dataset and baseilnes of the paper: XDailyDialog: A Multilingual Parallel Corpus for Chit-chat. You can also visit this [website of XDailyDialog](https://liuzeming01.github.io/XDailyDialog/) to see details. 
 
 Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan, Kaiping Peng
 
