@@ -38,21 +38,18 @@ To run baselines, python libraries blow are needed.
 - transformers            4.7.0
 
 ## 5. Preprocess
-run `parser.py` to convert original txt data into Monolingual, Multi-lingual, Cross-lingual settings. Then we need to preprocess our txt data from different tasks into standard `datasets` input format, you also need to put our tasks txt data in./data/raw/ like:
+run `parser.py` to convert original txt data into Monolingual, Multi-lingual, Cross-lingual settings. Then run `split.py` to split data into train, dev and test. Then we need to run `preprocess.py` to process our txt data from different tasks into standard `datasets` input format, you also need to put our tasks txt data in./data/raw/ like:
+```
+python parser.py
+python split.py
+python preprocess.py
+```
 ```
 data
 ├── crosslingual
 │   ├── De_En
-│   ├── De_Nl
 │   ├── En_De
 │   ├── En_Zh
-│   ├── Es_It
-│   ├── Fr_It
-│   ├── It_Es
-│   ├── It_Fr
-│   ├── It_Ro
-│   ├── Nl_De
-│   ├── Ro_It
 │   └── Zh_En
 ├── dataset.py
 ├── monolingual
@@ -61,7 +58,6 @@ data
 │   ├── It
 │   └── Zh
 ├── multilingual
-│   ├── cache
 │   ├── dev.jsonl
 │   ├── test.jsonl
 │   └── train.jsonl

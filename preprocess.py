@@ -18,9 +18,12 @@ save_dir = './data'
 import os
 datas = []
 for setting in os.listdir(data_dir):
-    for task in os.listdir(data_dir + setting):
-        datas.append(setting + "/" + task)
-print(datas)
+    if "multilingual" not in setting:
+        for task in os.listdir(data_dir + setting):
+            datas.append(setting + "/" + task)
+    else:
+        datas.append(setting)
+print("setttings: {}".format(datas))
 
 for data in datas:
     print(data)
