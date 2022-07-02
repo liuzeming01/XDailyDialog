@@ -3,7 +3,7 @@ export PYTHONIOENCODING=utf8
 
 export CUDA_VISIBLE_DEVICES=$1
 
-WORKING_DIR=/data2/yujie/andrew_data/daily/baseline
+WORKING_DIR=`pwd`
 
 # CMD="pip install -r ${WORKING_DIR}/re.txt"
 # echo ${CMD}
