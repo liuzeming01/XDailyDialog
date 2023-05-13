@@ -18,13 +18,23 @@ multilingual, and cross-lingual chit-chat.
 Data are avalible in data folder (Full dataset wiil be avalible after our paper is published! We randomly sampled 1k dialogues from English, Chinese, German and Italian data during review period). Dialogues, topics, emotion and action labels are in the same format as [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf). We provide mannually labelled `dialogues_text_De` for German, `dialogues_text_It` for Italian and `dialogues_text_Zh` for Chinese version.  All files in `data` folders are:
 ```
 ls ./data
-dialogues_text_En.txt
-dialogues_text_It.txt
-dialogues_text_De.txt
-dialogues_text_Zh.txt
-dialogues_action.txt
-dialogues_topic.txt
-dialogues_emotion.txt
+data/
+├── 1k_part_data
+│   ├── dialogues_action.txt
+│   ├── dialogues_emotion.txt
+│   ├── dialogues_text_De.txt
+│   ├── dialogues_text_En.txt
+│   ├── dialogues_text_It.txt
+│   ├── dialogues_text_Zh.txt
+│   └── dialogues_topic.txt
+├── dataset.py
+├── dialogues_action.txt
+├── dialogues_emotion.txt
+├── dialogues_text_De.txt
+├── dialogues_text_En.txt
+├── dialogues_text_It.txt
+├── dialogues_text_Zh.txt
+└── dialogues_topic.txt
 ```
 
 ## 3. Basic Statistics
