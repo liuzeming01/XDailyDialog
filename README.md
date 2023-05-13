@@ -4,6 +4,8 @@ This [repository](https://github.com/liuzeming01/XDailyDialog) includes the data
 
 Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan, Kaiping Peng
 
+## What's New
+- 2023/05/12 Update datesets full version.
 
 We created this dataset based on the popular dialogue dataset (English Only): [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf)
 ## 1. Abstract:
