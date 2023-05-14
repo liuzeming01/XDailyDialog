@@ -24,11 +24,11 @@ def split(root):
 
 if __name__ == '__main__':
     split("./data/multilingual")
-    for lan in os.listdir("./data/monolingal"):
-        split(os.path.join("./data/monolingal", lan))
+    for lan in os.listdir("./data/monolingual"):
+        split(os.path.join("./data/monolingual", lan))
     for lan in os.listdir("./data/crosslingual"):
         split(os.path.join("./data/crosslingual", lan))
     os.mkdir("./data/raw")
-    shutil.move("./data/monolingal", "./data/raw/monolingal")
+    shutil.move("./data/monolingual", "./data/raw/monolingual")
     shutil.move("./data/crosslingual", "./data/raw/crosslingual")
     shutil.move("./data/multilingual", "./data/raw/multilingual")

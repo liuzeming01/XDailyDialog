@@ -140,9 +140,9 @@ def mkdirs(root):
     try:
         os.mkdir(os.path.join(root, "multilingual"))
         lans = ["En", "Zh", "De", "It"]
-        os.mkdir(os.path.join(root, "monolingal"))
+        os.mkdir(os.path.join(root, "monolingual"))
         for lan in lans:
-            os.mkdir(os.path.join(root, "monolingal", lan))
+            os.mkdir(os.path.join(root, "monolingual", lan))
         lans = ["En_Zh", "Zh_En", "En_De", "De_En"]
         os.mkdir(os.path.join(root, "crosslingual"))
         for lan in lans:
@@ -158,10 +158,10 @@ if __name__ == '__main__':
     concentrate_dialogue_topic_act_emotion('data/dialogues_text_It.txt', 'data/It.txt')
 
     #monolingual
-    generate_data_for_monolingual('data/En.txt', 'data/monolingal/En/train.src', 'data/monolingal/En/train.tgt', 1, '<En>')
-    generate_data_for_monolingual('data/Zh.txt', 'data/monolingal/Zh/train.src', 'data/monolingal/Zh/train.tgt', 1, '<Zh>')
-    generate_data_for_monolingual('data/De.txt', 'data/monolingal/De/train.src', 'data/monolingal/De/train.tgt', 1, '<De>')
-    generate_data_for_monolingual('data/It.txt', 'data/monolingal/It/train.src', 'data/monolingal/It/train.tgt', 1, '<It>')
+    generate_data_for_monolingual('data/En.txt', 'data/monolingual/En/train.src', 'data/monolingual/En/train.tgt', 1, '<En>')
+    generate_data_for_monolingual('data/Zh.txt', 'data/monolingual/Zh/train.src', 'data/monolingual/Zh/train.tgt', 1, '<Zh>')
+    generate_data_for_monolingual('data/De.txt', 'data/monolingual/De/train.src', 'data/monolingual/De/train.tgt', 1, '<De>')
+    generate_data_for_monolingual('data/It.txt', 'data/monolingual/It/train.src', 'data/monolingual/It/train.tgt', 1, '<It>')
 
     #multilingual
     try:
@@ -169,10 +169,10 @@ if __name__ == '__main__':
         os.remove("data/multilingual/train.tgt")
     except:
         pass
-    generate_data_for_multilingual('data/monolingal/De/train.src', 'data/monolingal/De/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
-    generate_data_for_multilingual('data/monolingal/En/train.src', 'data/monolingal/En/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
-    generate_data_for_multilingual('data/monolingal/It/train.src', 'data/monolingal/It/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
-    generate_data_for_multilingual('data/monolingal/Zh/train.src', 'data/monolingal/Zh/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
+    generate_data_for_multilingual('data/monolingual/De/train.src', 'data/monolingual/De/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
+    generate_data_for_multilingual('data/monolingual/En/train.src', 'data/monolingual/En/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
+    generate_data_for_multilingual('data/monolingual/It/train.src', 'data/monolingual/It/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
+    generate_data_for_multilingual('data/monolingual/Zh/train.src', 'data/monolingual/Zh/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
 
     #crosslingual
     get_utterance_pair('data/dialogues_text_En.txt', 'data/dialogues_text_Zh.txt', 'data/En2Zh.txt')
