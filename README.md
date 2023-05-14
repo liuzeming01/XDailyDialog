@@ -2,9 +2,10 @@
 
 This [repository](https://github.com/liuzeming01/XDailyDialog) includes the dataset and baseilnes of the paper: XDailyDialog: A Multilingual Parallel Corpus for Chit-chat. You can also visit this [website of XDailyDialog](https://liuzeming01.github.io/XDailyDialog/) to see details. 
 
-Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan, Kaiping Peng
+Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Haifeng Wang, Zheng-Yu Niu, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan, Kaiping Peng
 
 ## What's New
+- 2023/05/13 
 - 2023/05/12 Update datesets full version.
 
 We created this dataset based on the popular dialogue dataset (English Only): [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf)
@@ -48,6 +49,9 @@ To run baselines, python libraries blow are needed.
 - sentencepiece           0.1.96
 - datasets                1.8.0
 - transformers            4.7.0
+- jieba
+- nltk
+- sacrebleu
 
 ## 5. Preprocess
 run `parser.py` to convert original txt data into Monolingual, Multi-lingual, Cross-lingual settings. Then run `split.py` to split data into train, dev and test. Then we need to run `preprocess.py` to process our txt data from different tasks into standard `datasets` input format, you also need to put our tasks txt data in./data/raw/ like:
