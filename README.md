@@ -49,9 +49,9 @@ To run baselines, python libraries blow are needed.
 - sentencepiece           0.1.96
 - datasets                1.8.0
 - transformers            4.7.0
-- jieba
-- nltk
-- sacrebleu
+- jieba                   0.42.1
+- nltk                    0.8.1
+- sacrebleu               2.3.1
 
 ## 5. Preprocess
 run `parser.py` to convert original txt data into Monolingual, Multi-lingual, Cross-lingual settings. Then run `split.py` to split data into train, dev and test. Then we need to run `preprocess.py` to process our txt data from different tasks into standard `datasets` input format, you also need to put our tasks txt data in./data/raw/ like:
