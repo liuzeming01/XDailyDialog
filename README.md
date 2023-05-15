@@ -153,11 +153,23 @@ sh download_mbart.sh
 After executing the above command, the corresponding mbart model will be downloaded to the local directory.
 Then, it is necessary to preprocess the data using mbart's corresponding tokenization method.
 ```
-sh preprocess_data.sh
+sh preprocess_data.sh monolingual En
 ```
+`monolingual` means the TYPE=monolingual and `En` means the language type.
 After preprocessing, fine-tuning can be started.
 ```
 sh run_finetune.sh
+```
+After finetuning, it is necessary to use the Finetuned model to construct the faiss index and datastore.
+```
+sh create_data_store.sh
+sh build_faiss_index.sh
+```
+
+Based on the results of the above construction, we can train the KNN-Chat model we need.
+
+```
+sh train_knn-mt_model.sh
 ```
 
 
