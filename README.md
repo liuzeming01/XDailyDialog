@@ -5,7 +5,7 @@ This [repository](https://github.com/liuzeming01/XDailyDialog) includes the data
 Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Haifeng Wang, Zheng-Yu Niu, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan, Kaiping Peng
 
 ## What's New
-- 2023/05/13 
+- 2023/05/13 add knn-chat first train step. 
 - 2023/05/12 Update datesets full version.
 
 We created this dataset based on the popular dialogue dataset (English Only): [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf)
@@ -143,7 +143,25 @@ OPTS=" --model_name_or_path ${CKPT_PATH} \
 --metric_for_best_model bleu-2 \
 --save_total_limit 2"
 ```
-## 7. License
+
+## 7. Reproduce knn-chat results
+
+```
+cd knn-chat
+sh download_mbart.sh
+```
+After executing the above command, the corresponding mbart model will be downloaded to the local directory.
+Then, it is necessary to preprocess the data using mbart's corresponding tokenization method.
+```
+sh preprocess_data.sh
+```
+After preprocessing, fine-tuning can be started.
+```
+sh run_finetune.sh
+```
+
+
+## 8. License
 
 Apache License 2.0 and CC BY-NC-SA 4.0.
 
