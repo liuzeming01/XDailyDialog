@@ -5,6 +5,7 @@ This [repository](https://github.com/liuzeming01/XDailyDialog) includes the data
 Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Haifeng Wang, Zheng-Yu Niu, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan, Kaiping Peng
 
 ## What's New
+- 2023/05/15 complete knn-chat train prosedure.
 - 2023/05/13 add knn-chat first train step. 
 - 2023/05/12 Update datesets full version.
 
@@ -146,17 +147,29 @@ OPTS=" --model_name_or_path ${CKPT_PATH} \
 
 ## 7. Reproduce knn-chat results
 
+Firstly, you need to download the original `mbart` model file:
 ```
 cd knn-chat
 sh download_mbart.sh
 ```
-After executing the above command, the corresponding mbart model will be downloaded to the local directory.
-Then, it is necessary to preprocess the data using mbart's corresponding tokenization method.
+After executing the above command, the corresponding `mbart` model will be downloaded to the local directory.
+Then, it is necessary to preprocess the specific types data using the corresponding tokenization methods of `mbart`.
 ```
 sh preprocess_data.sh monolingual En
 ```
-`monolingual` means the TYPE=monolingual and `En` means the language type.
+`monolingual` means the TYPE=`monolingual` and `En` means the LAN=`En` type.
+The combination of TYPE and LAN can be found from the following combinations:
+TYPE=`monolingual` LAN=`En`, `It`, `De`, or `Zh`
+TYPE=`crosslingual` LAN=`En-DE`, ``, `De`, or `Zh`
+TYPE=`multilingual` LAN=`En`, `It`, `De`, or `Zh`
+
 After preprocessing, fine-tuning can be started.
+Finetune mbart model can be done in two ways: 
+1. Through the huggingface [Transformers](https://github.com/huggingface/transformers) framework.
+2. Through the [fairseq](https://github.com/facebookresearch/fairseq) framework.
+
+The following examples are fine-tuned through the fairseq framework:
+
 ```
 sh run_finetune.sh
 ```
@@ -166,7 +179,7 @@ sh create_data_store.sh
 sh build_faiss_index.sh
 ```
 
-Based on the results of the above construction, we can train the KNN-Chat model we need.
+Based on the results of the above construction, you can train the KNN-Chat model we need.
 
 ```
 sh train_knn-mt_model.sh
