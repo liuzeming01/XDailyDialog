@@ -1,19 +1,18 @@
 # XDailyDialog: A Multilingual Parallel Corpus for Chit-chat
 
-This [repository](https://github.com/liuzeming01/XDailyDialog) includes the dataset and baseilnes of the paper: XDailyDialog: A Multilingual Parallel Corpus for Chit-chat. You can also visit this [website of XDailyDialog](https://liuzeming01.github.io/XDailyDialog/) to see details. 
+This [repository](https://github.com/liuzeming01/XDailyDialog) includes the dataset and baseilnes of the paper: "XDailyDialog: A Multilingual Parallel Dialogue Corpus". You can also visit this [website of XDailyDialog](https://liuzeming01.github.io/XDailyDialog/) to see details. 
 
-Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Haifeng Wang, Zheng-Yu Niu, Peng Zhang, Yuyu Zhang, Mrinmaya Sachan, Kaiping Peng
+Authors: Zeming Liu*, Ping Nie*, Jie Cai*, Haifeng Wang, Zheng-Yu Niu, Peng Zhang, Mrinmaya Sachan, Kaiping Peng
 
 ## What's New
-- 2023/05/15 complete knn-chat train prosedure.
-- 2023/05/13 add knn-chat first train step. 
+- 2023/05/15 Update knn-chat train prosedure.
+- 2023/05/13 Add knn-chat first train step. 
 - 2023/05/12 Update datesets full version.
 
-We created this dataset based on the popular dialogue dataset (English Only): [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf)
+We created this  *multilingual parallel dialogue corpus* based on the popular english dialogue dataset: [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf)
 ## 1. Abstract:
 
-In this paper, we provide a multilingual parallel chit-chat dataset, XDailyDialog, to enable researchers to explore the challenging task of multilingual and cross-lingual Chit-chat. The difference between XDailyDialog and existing chit-chat datasets is that the conversation in XDailyDialog is annotated in multilingual and is parallel, while other datasets are restricted to a single language or are not parallel. We collect 13K dialogs aligned across 4 languages (52K dialogues and 410K utterances in total). We then propose a conversation generation framework, kNN-Chat, with a novel kNN-search mechanism that can support unified response retrieval for monolingual, multilingual, and cross-lingual chit-chat generation. Experiment results show that the use of multilingual data can bring performance improvement for monolingual chit-chat, indicating the benefits of XDailyDialog. Finally, this dataset provides a challenging testbed for future studies of monolingual,12
-multilingual, and cross-lingual chit-chat.
+High-quality corpora are significant to the development of dialogue models. However, most existing corpora for open-domain dialogue modeling are limited to a single language. The absence of multilingual open-domain dialog corpora not only limits the research on multilingual or cross-lingual transfer learning but also hinders the development of robust open-domain dialogue systems that can be deployed in other parts of the world. In this paper, we provide a multilingual parallel open-domain dialog dataset, *XDailyDialog* to enable researchers to explore the challenging task of multilingual and cross-lingual open-domain dialogue. *XDailyDialog* includes 13K dialogues aligned across 4 languages (52K dialogues and 410K utterances in total). We then propose a dialogue generation model, *kNN-Chat*, which has a novel kNN-search mechanism to support unified response retrieval for monolingual, multilingual, and cross-lingual dialogue. Experiment results show the effectiveness of this framework.
 
 ## 2. Dataset
 
