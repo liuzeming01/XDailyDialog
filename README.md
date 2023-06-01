@@ -1,4 +1,4 @@
-# XDailyDialog: A Multilingual Parallel Corpus for Chit-chat
+# XDailyDialog: A Multilingual Parallel Dialogue Corpus
 
 This [repository](https://github.com/liuzeming01/XDailyDialog) includes the dataset and baseilnes of the paper: "XDailyDialog: A Multilingual Parallel Dialogue Corpus". You can also visit this [website of XDailyDialog](https://liuzeming01.github.io/XDailyDialog/) to see details. 
 
