@@ -6,7 +6,7 @@ import json
 from itertools import combinations, permutations
 import random
 import datetime
-
+import shutil
 
 def concentrate_dialogue_topic_act_emotion(dialogue_filename, output_filename, topic_filename = 'data/dialogues_topic.txt', act_filename = 'data/dialogues_action.txt', emotion_filename = 'data/dialogues_emotion.txt'):
     topic_list = [line.strip() for line in open(topic_filename, 'r').readlines()]
@@ -22,13 +22,16 @@ def concentrate_dialogue_topic_act_emotion(dialogue_filename, output_filename, t
         print('Data Error!')
 
 def generate_data_for_monolingual(input_filename, output_filename, target_filename, flag, language_flag):
+    def not_empty(s):
+        return s and s.strip()
     output_file = open(output_filename, 'w')
     target_file = open(target_filename, 'w')
     for line in open(input_filename, 'r').readlines():
         lineArr = line.strip().split('\t')
         # data = lineArr[0].strip()[::-1].replace('__uoe__', '', 1)[::-1].strip().split('__eou__')
         data = lineArr[0].strip().split('__eou__')
-        for i in range(1, len(data), 2):
+        data = list(filter(not_empty,data))
+        for i in range(1, len(data)-1, 2):
             context = data[:i]
             response = data[i].strip()
             current_tae = [lineArr[1][0], lineArr[2].strip().split(' ')[i], lineArr[3].strip().split(' ')[i]]
@@ -51,14 +54,22 @@ def generate_data_for_multilingual(input_filename, input_target_filename, output
 def get_utterance_pair(en_input_filename, other_input_filename, output_filename):
     en_utterance = []
     other_utterance = []
-    for line in open(en_input_filename, 'r').readlines():
-        lineArr = line.strip().split('__eou__')
-        for la in lineArr:
-            en_utterance.append(la.strip())
-    for line in open(other_input_filename, 'r').readlines():
-        lineArr = line.strip().split('__eou__')
-        for la in lineArr:
-            other_utterance.append(la.strip())
+    
+    other_input_file_name = other_input_filename
+    en_input_file_name = en_input_filename
+
+    en_input_file_list = [en_input_filename, en_input_file_name.replace('train','dev'), en_input_file_name.replace('train','test')]
+    other_input_file_list = [other_input_filename, other_input_file_name.replace('train','dev'), other_input_file_name.replace('train','test')]
+    for en_input_filename in en_input_file_list:
+        for line in open(en_input_filename, 'r').readlines():
+            lineArr = line.strip().split('__eou__')
+            for la in lineArr:
+                en_utterance.append(la.strip())
+    for other_input_filename in other_input_file_list:
+        for line in open(other_input_filename, 'r').readlines():
+            lineArr = line.strip().split('__eou__')
+            for la in lineArr:
+                other_utterance.append(la.strip())
     if len(en_utterance) == len(other_utterance):
         output_file = open(output_filename, 'w')
         for i in range(len(en_utterance)):
@@ -68,6 +79,8 @@ def get_utterance_pair(en_input_filename, other_input_filename, output_filename)
         print('Data Error!')
 
 def generate_data_for_crosslingual(input_src_filename, language_flag, dict_filename, output_src_filename, output_tgt_filename, flag):
+    def not_empty(s):
+        return s and s.strip()
     current_dict = {}
     for line in open(dict_filename, 'r').readlines():
         lineArr = line.strip().split('\t')
@@ -83,7 +96,7 @@ def generate_data_for_crosslingual(input_src_filename, language_flag, dict_filen
         lineArr = line.strip().split('\t')
         # data = lineArr[0].strip()[::-1].replace('__uoe__', '', 1)[::-1].strip().split('__eou__')
         data = lineArr[0].strip().split('__eou__')
-        # print(data)
+        data = list(filter(not_empty,data)) 
         for i in range(1, len(data), 2):
             context = data[:i]
             response = data[i].strip()
@@ -152,17 +165,27 @@ def mkdirs(root):
 
 if __name__ == '__main__':
     mkdirs("./data")
-    concentrate_dialogue_topic_act_emotion('data/dialogues_text_En.txt', 'data/En.txt')
-    concentrate_dialogue_topic_act_emotion('data/dialogues_text_Zh.txt', 'data/Zh.txt')
-    concentrate_dialogue_topic_act_emotion('data/dialogues_text_De.txt', 'data/De.txt')
-    concentrate_dialogue_topic_act_emotion('data/dialogues_text_It.txt', 'data/It.txt')
+    #concentrate_dialogue_topic_act_emotion('data/dialogues_text_En.txt', 'data/En.txt')
+    #concentrate_dialogue_topic_act_emotion('data/dialogues_text_Zh.txt', 'data/Zh.txt')
+    #concentrate_dialogue_topic_act_emotion('data/dialogues_text_De.txt', 'data/De.txt')
+    #concentrate_dialogue_topic_act_emotion('data/dialogues_text_It.txt', 'data/It.txt')
 
+    
     #monolingual
-    generate_data_for_monolingual('data/En.txt', 'data/monolingual/En/train.src', 'data/monolingual/En/train.tgt', 1, '<En>')
-    generate_data_for_monolingual('data/Zh.txt', 'data/monolingual/Zh/train.src', 'data/monolingual/Zh/train.tgt', 1, '<Zh>')
-    generate_data_for_monolingual('data/De.txt', 'data/monolingual/De/train.src', 'data/monolingual/De/train.tgt', 1, '<De>')
-    generate_data_for_monolingual('data/It.txt', 'data/monolingual/It/train.src', 'data/monolingual/It/train.tgt', 1, '<It>')
+    generate_data_for_monolingual('data/en_train_human.txt', 'data/monolingual/En/train.src', 'data/monolingual/En/train.tgt', 1, '<En>')
+    generate_data_for_monolingual('data/zh_train_human.txt', 'data/monolingual/Zh/train.src', 'data/monolingual/Zh/train.tgt', 1, '<Zh>')
+    generate_data_for_monolingual('data/de_train_human.txt', 'data/monolingual/De/train.src', 'data/monolingual/De/train.tgt', 1, '<De>')
+    generate_data_for_monolingual('data/it_train_human.txt', 'data/monolingual/It/train.src', 'data/monolingual/It/train.tgt', 1, '<It>')
 
+    generate_data_for_monolingual('data/en_dev_human.txt', 'data/monolingual/En/dev.src', 'data/monolingual/En/dev.tgt', 1, '<En>')
+    generate_data_for_monolingual('data/zh_dev_human.txt', 'data/monolingual/Zh/dev.src', 'data/monolingual/Zh/dev.tgt', 1, '<Zh>')
+    generate_data_for_monolingual('data/de_dev_human.txt', 'data/monolingual/De/dev.src', 'data/monolingual/De/dev.tgt', 1, '<De>')
+    generate_data_for_monolingual('data/it_dev_human.txt', 'data/monolingual/It/dev.src', 'data/monolingual/It/dev.tgt', 1, '<It>')
+    
+    generate_data_for_monolingual('data/en_test_human.txt', 'data/monolingual/En/test.src', 'data/monolingual/En/test.tgt', 1, '<En>')
+    generate_data_for_monolingual('data/zh_test_human.txt', 'data/monolingual/Zh/test.src', 'data/monolingual/Zh/test.tgt', 1, '<Zh>')
+    generate_data_for_monolingual('data/de_test_human.txt', 'data/monolingual/De/test.src', 'data/monolingual/De/test.tgt', 1, '<De>')
+    generate_data_for_monolingual('data/it_test_human.txt', 'data/monolingual/It/test.src', 'data/monolingual/It/test.tgt', 1, '<It>')
     #multilingual
     try:
         os.remove("data/multilingual/train.src")
@@ -174,14 +197,36 @@ if __name__ == '__main__':
     generate_data_for_multilingual('data/monolingual/It/train.src', 'data/monolingual/It/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
     generate_data_for_multilingual('data/monolingual/Zh/train.src', 'data/monolingual/Zh/train.tgt', 'data/multilingual/train.src', 'data/multilingual/train.tgt')
 
+    generate_data_for_multilingual('data/monolingual/De/dev.src', 'data/monolingual/De/dev.tgt', 'data/multilingual/dev.src', 'data/multilingual/dev.tgt')
+    generate_data_for_multilingual('data/monolingual/En/dev.src', 'data/monolingual/En/dev.tgt', 'data/multilingual/dev.src', 'data/multilingual/dev.tgt')
+    generate_data_for_multilingual('data/monolingual/It/dev.src', 'data/monolingual/It/dev.tgt', 'data/multilingual/dev.src', 'data/multilingual/dev.tgt')
+    generate_data_for_multilingual('data/monolingual/Zh/dev.src', 'data/monolingual/Zh/dev.tgt', 'data/multilingual/dev.src', 'data/multilingual/dev.tgt')
+    
+    generate_data_for_multilingual('data/monolingual/De/test.src', 'data/monolingual/De/test.tgt', 'data/multilingual/test.src', 'data/multilingual/test.tgt')
+    generate_data_for_multilingual('data/monolingual/En/test.src', 'data/monolingual/En/test.tgt', 'data/multilingual/test.src', 'data/multilingual/test.tgt')
+    generate_data_for_multilingual('data/monolingual/It/test.src', 'data/monolingual/It/test.tgt', 'data/multilingual/test.src', 'data/multilingual/test.tgt')
+    generate_data_for_multilingual('data/monolingual/Zh/test.src', 'data/monolingual/Zh/test.tgt', 'data/multilingual/test.src', 'data/multilingual/test.tgt')
     #crosslingual
-    get_utterance_pair('data/dialogues_text_En.txt', 'data/dialogues_text_Zh.txt', 'data/En2Zh.txt')
-    get_utterance_pair('data/dialogues_text_En.txt', 'data/dialogues_text_De.txt', 'data/En2De.txt')
-    get_utterance_pair('data/dialogues_text_En.txt', 'data/dialogues_text_It.txt', 'data/En2It.txt')
+    get_utterance_pair('data/en_train_human.txt', 'data/zh_train_human.txt', 'data/En2Zh.txt')
+    get_utterance_pair('data/en_train_human.txt', 'data/de_train_human.txt', 'data/En2De.txt')
+    get_utterance_pair('data/en_train_human.txt', 'data/it_train_human.txt', 'data/En2It.txt')
     # generate_data_for_crosslingual_no_En('data/De.txt', '<De>', 'data/En2De.txt', 'data/En2Nl.txt', 'data/crosslingual/Nl_De/train.src', 'data/crosslingual/Nl_De/train.tgt')
-    generate_data_for_crosslingual('data/Zh.txt', '<Zh>', 'data/En2Zh.txt', 'data/crosslingual/En_Zh/train.src', 'data/crosslingual/En_Zh/train.tgt', 'Zh')
-    generate_data_for_crosslingual('data/En.txt', '<En>', 'data/En2Zh.txt', 'data/crosslingual/Zh_En/train.src', 'data/crosslingual/Zh_En/train.tgt', 'En')
-    generate_data_for_crosslingual('data/De.txt', '<De>', 'data/En2De.txt', 'data/crosslingual/En_De/train.src', 'data/crosslingual/En_De/train.tgt', 'De')
-    generate_data_for_crosslingual('data/En.txt', '<En>', 'data/En2De.txt', 'data/crosslingual/De_En/train.src', 'data/crosslingual/De_En/train.tgt', 'En')
+    generate_data_for_crosslingual('data/zh_train_human.txt', '<Zh>', 'data/En2Zh.txt', 'data/crosslingual/En_Zh/train.src', 'data/crosslingual/En_Zh/train.tgt', 'Zh')
+    generate_data_for_crosslingual('data/en_train_human.txt', '<En>', 'data/En2Zh.txt', 'data/crosslingual/Zh_En/train.src', 'data/crosslingual/Zh_En/train.tgt', 'En')
+    generate_data_for_crosslingual('data/de_train_human.txt', '<De>', 'data/En2De.txt', 'data/crosslingual/En_De/train.src', 'data/crosslingual/En_De/train.tgt', 'De')
+    generate_data_for_crosslingual('data/en_train_human.txt', '<En>', 'data/En2De.txt', 'data/crosslingual/De_En/train.src', 'data/crosslingual/De_En/train.tgt', 'En')
 
+    generate_data_for_crosslingual('data/zh_dev_human.txt', '<Zh>', 'data/En2Zh.txt', 'data/crosslingual/En_Zh/dev.src', 'data/crosslingual/En_Zh/dev.tgt', 'Zh')
+    generate_data_for_crosslingual('data/en_dev_human.txt', '<En>', 'data/En2Zh.txt', 'data/crosslingual/Zh_En/dev.src', 'data/crosslingual/Zh_En/dev.tgt', 'En')
+    generate_data_for_crosslingual('data/de_dev_human.txt', '<De>', 'data/En2De.txt', 'data/crosslingual/En_De/dev.src', 'data/crosslingual/En_De/dev.tgt', 'De')
+    generate_data_for_crosslingual('data/en_dev_human.txt', '<En>', 'data/En2De.txt', 'data/crosslingual/De_En/dev.src', 'data/crosslingual/De_En/dev.tgt', 'En')
 
+    generate_data_for_crosslingual('data/zh_test_human.txt', '<Zh>', 'data/En2Zh.txt', 'data/crosslingual/En_Zh/test.src', 'data/crosslingual/En_Zh/test.tgt', 'Zh')
+    generate_data_for_crosslingual('data/en_test_human.txt', '<En>', 'data/En2Zh.txt', 'data/crosslingual/Zh_En/test.src', 'data/crosslingual/Zh_En/test.tgt', 'En')
+    generate_data_for_crosslingual('data/de_test_human.txt', '<De>', 'data/En2De.txt', 'data/crosslingual/En_De/test.src', 'data/crosslingual/En_De/test.tgt', 'De')
+    generate_data_for_crosslingual('data/en_test_human.txt', '<En>', 'data/En2De.txt', 'data/crosslingual/De_En/test.src', 'data/crosslingual/De_En/test.tgt', 'En')
+    
+    os.mkdir("./data/raw")
+    shutil.move("./data/monolingual", "./data/raw/monolingual")
+    shutil.move("./data/crosslingual", "./data/raw/crosslingual")
+    shutil.move("./data/multilingual", "./data/raw/multilingual")
