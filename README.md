@@ -16,7 +16,7 @@ High-quality corpora are significant to the development of dialogue models. Howe
 
 ## 2. Dataset
 
-Data are avalible in data folder (Full dataset wiil be avalible after our paper is published! We randomly sampled 1k dialogues from English, Chinese, German and Italian data during review period). Dialogues, topics, emotion and action labels are in the same format as [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf). We provide mannually labelled `dialogues_text_De` for German, `dialogues_text_It` for Italian and `dialogues_text_Zh` for Chinese version.  All files in `data` folders are:
+Data are available in data folder. Dialogues, topics, emotion, and action labels are in the same format as [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf). We provide manually labeled `dialogues_text_De` for German, `dialogues_text_It` for Italian, and `dialogues_text_Zh` for the Chinese version.  All files in the `data` folders are:
 ```
 ls ./data
 data/
@@ -40,12 +40,12 @@ data/
 
 ## 3. Basic Statistics
 
-The developed XDailyDialog dataset contains 52,472 Manually Labelled multi-lingual multi-turn dialogues for four languages (English, Chinese, German, Italian). English data is come from [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf). 
+The developed XDailyDialog dataset contains 52,472 Manually Labeled multi-lingual multi-turn dialogues for four languages (English, Chinese, German, Italian). English data comes from [DailyDialog: A Manually Labelled Multi-turn Dialogue Dataset](https://arxiv.org/pdf/1710.03957.pdf). 
 
 ![](./figs/fig11.png)
 
 ## 4. Requirements
-To run baselines, python libraries blow are needed.
+To run baselines, python libraries below are needed.
 - sentencepiece           0.1.96
 - datasets                1.8.0
 - transformers            4.7.0
@@ -54,7 +54,7 @@ To run baselines, python libraries blow are needed.
 - sacrebleu               2.3.1
 
 ## 5. Preprocess
-run `parser.py` to convert original txt data into Monolingual, Multi-lingual, Cross-lingual settings. Then run `split.py` to split data into train, dev and test. Then we need to run `preprocess.py` to process our txt data from different tasks into standard `datasets` input format, you also need to put our tasks txt data in./data/raw/ like:
+run `parser.py` to convert original txt data into Monolingual, Multi-lingual, and Cross-lingual settings. Then run `split.py` to split data into train, dev and test. Then we need to run `preprocess.py` to process our txt data from different tasks into standard `datasets` input format, you also need to put our tasks txt data in./data/raw/ like:
 ```
 python parser.py
 python split.py
@@ -107,7 +107,7 @@ export CUDA_VISIBLE_DEVICES=$1 # gpu number
 
 WORKING_DIR=./ #your work dir where run.bash is in. 
 
-DATA_NAME=$2  # "data/monolingual/En", task name and corresponding directory. 
+DATA_NAME=$2  # "data/monolingual/En", task name, and corresponding directory. 
 EPOCHS=5
 BATCH_SIZE=4
 EVAL_BATCH_SIZE=4
@@ -152,7 +152,7 @@ cd knn-chat
 sh download_mbart.sh
 ```
 After executing the above command, the corresponding `mbart` model will be downloaded to the local directory.
-Then, it is necessary to preprocess the specific types data using the corresponding tokenization methods of `mbart`.
+Then, it is necessary to preprocess the specific types of data using the corresponding tokenization methods of `mbart`.
 ```
 sh preprocess_data.sh monolingual En
 ```
