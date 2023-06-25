@@ -57,7 +57,6 @@ To run baselines, python libraries below are needed.
 run `parser.py` to convert original txt data into Monolingual, Multi-lingual, and Cross-lingual settings. Then run `split.py` to split data into train, dev and test. Then we need to run `preprocess.py` to process our txt data from different tasks into standard `datasets` input format, you also need to put our tasks txt data in./data/raw/ like:
 ```
 python parser.py
-python split.py
 python preprocess.py
 ```
 ```
